@@ -1,10 +1,11 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import '../models/track.dart';
 
 class ApiService {
   static const String baseUrl = 'https://api.jamendo.com/v3.0';
-  static const String clientId = 'bc66595a';
+  static final String clientId = dotenv.env['JAMENDO_CLIENT_ID'] ?? '';
 
   Future<List<Track>> fetchTracks({int limit = 20, int offset = 0, String? query}) async {
     final String url = query != null && query.isNotEmpty
